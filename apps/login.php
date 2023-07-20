@@ -1,54 +1,45 @@
 <?php
 
-$validate=false;
+$validate = false;
 $result;
 
-if(isset($_SERVER['REQUEST_METHOD'])  &&  strcasecmp("post", $_SERVER['REQUEST_METHOD'] ) == 0)
-{
-   
-   if(!isset($_POST['email']) && !isset($_POST['password']) )
-   {
+if (isset($_SERVER['REQUEST_METHOD']) && strcasecmp("post", $_SERVER['REQUEST_METHOD']) == 0) {
+
+   if (!isset($_POST['email']) && !isset($_POST['password'])) {
        die("Invalid User ID and Password !");
    }
-  
-       
+
    $email = $_POST['email'];
    $password = $_POST['password'];
-       
+
    $host = "localhost";
-   $db ="appdb";
-   $user ="appuser";
-   $pass="appsecret123";
+   $db = "appdb";
+   $user = "appuser";
+   $pass = "appsecret123";
    $charset = 'utf8';
-   
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $opt = [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false
-    ];
-    
-    $pdo = null;
-    
-    try
-    {
-       $pdo = new PDO($dsn, $user, $pass, $opt); 
-       $stmt = $pdo->prepare('SELECT * FROM users where email=? and password=?');
+
+   $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+   $opt = [
+       PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+       PDO::ATTR_EMULATE_PREPARES   => false
+   ];
+
+   $pdo = null;
+
+   try {
+       $pdo = new PDO($dsn, $user, $pass, $opt);
+       $stmt = $pdo->prepare('SELECT * FROM users WHERE email=? AND password=?');
        $stmt->execute([$email, $password]);
        $result = $stmt->fetch();
-       
-       if($result)
-       {
-           $validate=true; 
+
+       if ($result) {
+           $validate = true;
        }
-     
-       
-    }
-    catch(PDOException $e)
-    {
+
+   } catch (PDOException $e) {
        echo $e->getMessage();
-    }
-       
+   }
 
 }
 
@@ -56,10 +47,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
 ?>
 
-
-
 <!DOCTYPE html>
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -88,54 +76,49 @@ header('Content-Type: text/html; charset=UTF-8');
 <div class="container mt-1">
 
 <?php 
-
-if($validate === false )
-{
-
+if ($validate === false) {
 ?>    
 
 <h3>Customer Login Here<br>
 <small>We take security seriously. Please don't sue us</small>
 </h3>
  
-<div><p>For real, though.  There are no weaknesses to give you a flag on this page.  Go find a username.  It can be done.  I believe in you.  The logfather believes in you.  Be the hero the hacker world needs you to be.  Just think, if you don't get paid enough, ransomware crews are always hiring for their next fall person. 
+<div>
+    <p>For real, though. There are no weaknesses to give you a flag on this page. Go find a username. It can be done. I believe in you. The logfather believes in you. Be the hero the hacker world needs you to be. Just think, if you don't get paid enough, ransomware crews are always hiring for their next fall person.</p>
 </div>
 
 <form action="login.php" method="POST" class="w-50">
-  <div class="form-group">
-    <label>Email address</label>
-    <input type="email" class="form-control" name="email" placeholder="Enter email">
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-primary">Login</button>
+    <div class="form-group">
+        <label>Email address</label>
+        <input type="email" class="form-control" name="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
 </form> 
  
  
 <?php
-}
-else
-{    
-?>
+} else {
+    // Add an additional check for the username 'DarthVader'
+    if ($result['email'] === 'lord.vader@empiremail.com') {
+        echo '<h1>This is the real Darkweb</h1>'        
+        echo '<p class="display-4 text-center">';
+        echo "Welcome back, Sir."ß;
+        echo "Have a flag, my lord:  ThisWasTooHard";
+        echo '</p>';
 
- <p class="display-4 text-center">
- 
- <?php 
- echo "Welcome " . $result['firstname'] . " " . $result['lastname'] ; 
- echo "Have a flag you scoundrel:  ThisWasTooHard"
- ?>
- 
- </p>
-
-<?php
+    } else {
+        echo "Welcome " . $result['firstname'] . " " . $result['lastname'];
+        echo "We are so pleased you returned."
+        echo "We're also pretty happy you're not suing us."
+        echo "Please enjoy the rest of this game... errr... enterprise software."
+    }
 }
 ?>
    
 </div>
-
-   
 </body>
 </html>
-

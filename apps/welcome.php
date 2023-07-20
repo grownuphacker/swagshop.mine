@@ -34,6 +34,7 @@ if(isset($_SERVER['REQUEST_METHOD'])  &&  strcasecmp("post", $_SERVER['REQUEST_M
     try
     {
        $pdo = new PDO($dsn, $user, $pass, $opt); 
+      //  file deepcode ignore Sqli: <please specify a reason of ignoring this>
        $stmt = $pdo->query($query);
     }
     catch(PDOException $e)
