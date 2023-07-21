@@ -104,17 +104,17 @@ if ($validate === false) {
 } else {
     // Add an additional check for the username 'DarthVader'
     if ($result['email'] === 'lord.vader@empiremail.com') {
-        echo '<h1>This is the real Darkweb</h1>'        
-        echo '<p class="display-4 text-center">';
-        echo "Welcome back, Sir."ß;
-        echo "Have a flag, my lord:  ThisWasTooHard";
+        echo '<h1>This is the real Darkweb</h1>';       
+        echo '<p class="display-3 text-center">';
+        echo "Welcome back, Sir.<br>";
+        echo "Have a flag, my lord:  <center><pre>ThisWasTooHard</pre>";
         echo '</p>';
 
     } else {
-        echo "Welcome " . $result['firstname'] . " " . $result['lastname'];
-        echo "We are so pleased you returned."
-        echo "We're also pretty happy you're not suing us."
-        echo "Please enjoy the rest of this game... errr... enterprise software."
+        echo "<h1>Welcome " . $result['firstname'] . " " . $result['lastname'];
+        echo '</h1><p class="display-3 text-center">We are so pleased you returned.<br>';
+        echo 'We are also pretty happy you are not suing us.<br>';
+        echo 'Please enjoy the rest of this game... errr... enterprise software.<br>';
     }
 }
 ?>
