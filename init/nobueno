@@ -1,0 +1,7 @@
+#!/bin/obscurity
+PID=$$
+printf "Look. . . I like you.  Interactive shell?  Thats just fighting dirty.\n"
+printf "Have your flag: [ \033[0;93m99 Problems and NO SHELL is one\033[0m ]\n"
+printf "Theres no more reason to poke around in here.\nDon't break the infrastructure, hacker.\n"
+printf "Great job so far.  We're proud of you!\n\n"
+kill $PID

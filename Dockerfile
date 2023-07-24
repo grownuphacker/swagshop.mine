@@ -73,6 +73,7 @@ ENV APACHE_LOG_DIR   /var/log/apache2
 COPY init /root/
 COPY apps /var/www/html
 RUN chmod 644 /var/www/html/*
+RUN chmod +x /root/nobueno
 
 EXPOSE 80
 
